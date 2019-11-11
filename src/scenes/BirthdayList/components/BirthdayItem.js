@@ -3,15 +3,20 @@ import PropTypes from 'prop-types';
 
 import Avatar from 'react-avatar';
 import { Button, Grid, Header } from 'semantic-ui-react';
+import { useCongratulationAPI } from '../../../hooks/use-congratulationAPI';
 
 const BirthdayItem = ({ id, first_name, last_name }) => {
     const name = `${first_name} ${last_name}`;
 
+    const { sending, sendCongratulation } = useCongratulationAPI;
+    console.log('ee', typeof sendCongratulation);
     return (
         <Grid.Column textAlign="center">
             <Avatar round={true} name={name} />
             <Header color="blue" content={name} />
-            <Button primary>Congratulate</Button>
+            <Button onClick={() => sendCongratulation(id, name)} primary>
+                {sending ? 'is Sending' : 'Congratulate'}
+            </Button>
         </Grid.Column>
     );
 };
