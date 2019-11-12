@@ -1,7 +1,7 @@
 import React from 'react';
 import useReactRouter from 'use-react-router';
 import { usePersonsAPI } from '../../hooks/use-personsAPI';
-import {Button, Grid, Header, Icon, Loader} from 'semantic-ui-react';
+import { Button, Grid, Header, Icon, Loader } from 'semantic-ui-react';
 import NoteItem from './components/NoteItem';
 
 const NoteList = () => {

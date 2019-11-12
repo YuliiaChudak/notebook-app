@@ -8,8 +8,7 @@ import { useCongratulationAPI } from '../../../hooks/use-congratulationAPI';
 const BirthdayItem = ({ id, first_name, last_name }) => {
     const name = `${first_name} ${last_name}`;
 
-    const { sending, sendCongratulation } = useCongratulationAPI;
-    console.log('ee', typeof sendCongratulation);
+    const { sending, sendCongratulation } = useCongratulationAPI();
     return (
         <Grid.Column textAlign="center">
             <Avatar round={true} name={name} />

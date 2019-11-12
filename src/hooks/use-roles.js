@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {getRolesRequest} from "../utils/server";
+import { useState, useEffect } from 'react';
+import { getRolesRequest } from "../utils/server";
 
 export const useRoles = () => {
     const [roles, setRoles] = useState([]);
@@ -15,5 +15,5 @@ export const useRoles = () => {
 
     return {
         roles,
-    }
+    };
 };
