@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import Avatar from 'react-avatar';
 import { Button, Grid, Header, List, Segment } from 'semantic-ui-react';
-import { deletePerson } from '../../../utils/server';
+import DeleteButton from './DeleteButton';
+import { DataContext } from '../../../context/DataProvider';
 
-const NoteItem = ({ id, first_name, last_name, patronymic, birthday, occupation }) => {
+const NoteItem = ({ id, first_name, last_name, patronymic, birthday, occupation, role_id }) => {
+    const { getRoleNameById } = useContext(DataContext);
     const name = `${first_name} ${last_name}`;
+    const role = getRoleNameById(role_id);
 
     return (
         <Grid.Column textAlign="center">
@@ -17,12 +20,11 @@ const NoteItem = ({ id, first_name, last_name, patronymic, birthday, occupation 
                     {patronymic && <List.Item icon="users" content={patronymic} />}
                     <List.Item icon="birthday cake" content={birthday} />
                     <List.Item icon="user circle" content={occupation} />
+                    <List.Item icon="user circle" content={role} />
                 </List>
                 <div>
                     <Button primary>edit</Button>
-                    <Button onClick={() => deletePerson(id)} secondary>
-                        delete
-                    </Button>
+                    <DeleteButton personId={id} />
                 </div>
             </Segment>
         </Grid.Column>
