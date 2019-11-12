@@ -1,14 +1,31 @@
 import React from 'react';
+import useReactRouter from 'use-react-router';
 import { usePersonsAPI } from '../../hooks/use-personsAPI';
-import { Grid, Header, Loader } from 'semantic-ui-react';
+import {Button, Grid, Header, Icon, Loader} from 'semantic-ui-react';
 import NoteItem from './components/NoteItem';
 
 const NoteList = () => {
     const { loading, persons } = usePersonsAPI();
+    const { history } = useReactRouter();
+    const redirectToAddNotePage = () => {
+        history.push('new');
+    };
 
     return (
         <>
-            <Header color="blue" as="h3" icon="address book outline" textAlign="center" content="Note List" />
+            <Grid divided="vertically">
+                <Grid.Row columns={2}>
+                    <Grid.Column floated="left">
+                        <Header color="blue" as="h3" icon="address book outline" textAlign="center" content="Note List" />
+                    </Grid.Column>
+                    <Grid.Column floated="right">
+                        <Button primary inverted color="blue" onClick={() => redirectToAddNotePage()}>
+                            <Icon name="plus" />
+                            Add note
+                        </Button>
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
             {loading && <Loader active inline="centered" size="large" />}
             <Grid divided="vertically">
                 <Grid.Row columns={2}>

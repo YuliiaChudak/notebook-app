@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { Button, Confirm } from 'semantic-ui-react'
+import React, { useState } from 'react';
+import { Button, Confirm } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
-const ConfirmButtons = () => {
+const ConfirmButtons = ({ children }) => {
     const [open, setOpen] = useState(false);
 
     const handleConfirm = () => setOpen(false);
@@ -9,6 +10,7 @@ const ConfirmButtons = () => {
 
     return (
         <div>
+            {children}
             <Confirm
                 open={setOpen(true)}
                 cancelButton="Never mind"
@@ -18,6 +20,10 @@ const ConfirmButtons = () => {
             />
         </div>
     );
+};
+
+ConfirmButtons.propTypes = {
+    children: PropTypes.element.isRequired,
 };
 
 export default ConfirmButtons;
