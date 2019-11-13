@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { getPersonsByBirthdayRequest } from '../utils/server';
+import { today } from '../utils/consts';
 
 export const usePersonBirthdayProvider = () => {
-    const [today] = new Date().toISOString().split('T');
-    console.log(today);
-
     const [loading, setLoading] = useState(true);
     const [persons, setPersons] = useState([]);
 

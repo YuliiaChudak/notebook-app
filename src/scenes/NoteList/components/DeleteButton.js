@@ -6,7 +6,7 @@ import { deletePerson } from '../../../utils/server';
 const DeleteButton = ({ personId }) => {
     const [open, setOpen] = useState(false);
 
-    const handleOpen = () => setOpen(true)
+    const handleOpen = () => setOpen(true);
     const handleConfirm = () => {
         deletePerson(personId);
         setOpen(false);

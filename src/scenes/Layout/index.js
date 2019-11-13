@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
     return (
         <Container>
             <Menu />
-            <Segment textAlign="center" vertical basic>
+            <Segment vertical basic>
                 {children}
             </Segment>
         </Container>

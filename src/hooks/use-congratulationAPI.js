@@ -22,5 +22,5 @@ export const useCongratulationAPI = () => {
     return {
         sending,
         sendCongratulation,
-    }
+    };
 };

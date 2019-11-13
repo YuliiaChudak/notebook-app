@@ -4,7 +4,7 @@ import axios from 'axios';
 export const deletePerson = id => {
     const url = `${API}/api/notes/${id}`;
 
-    console.log(id, 'DELETED')
+    console.log(id, 'DELETED');
     return axios.delete(url);
 };
 
@@ -27,4 +27,10 @@ export const sendCongratulationRequest = async (id, message) => {
     const url = `${API}/sms/send`;
 
     return axios.post(url, { id, message });
+};
+
+export const addNoteRequest = async payload => {
+    const url = `${API}/api/notes`;
+
+    return axios.post(url, payload);
 };

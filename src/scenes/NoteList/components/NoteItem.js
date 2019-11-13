@@ -20,7 +20,7 @@ const NoteItem = ({ id, first_name, last_name, patronymic, birthday, occupation,
                     {patronymic && <List.Item icon="users" content={patronymic} />}
                     <List.Item icon="birthday cake" content={birthday} />
                     <List.Item icon="user circle" content={occupation} />
-                    <List.Item icon="user circle" content={role} />
+                    <List.Item icon="handshake outline" content={role} />
                 </List>
                 <div>
                     <Button primary>edit</Button>
@@ -38,6 +38,7 @@ NoteItem.propTypes = {
     patronymic: PropTypes.string,
     birthday: PropTypes.string.isRequired,
     occupation: PropTypes.string.isRequired,
+    role_id: PropTypes.number.isRequired,
 };
 
 export default NoteItem;

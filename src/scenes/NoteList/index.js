@@ -16,10 +16,16 @@ const NoteList = () => {
             <Grid divided="vertically">
                 <Grid.Row columns={2}>
                     <Grid.Column floated="left">
-                        <Header color="blue" as="h3" icon="address book outline" textAlign="center" content="Note List" />
+                        <Header
+                            color="blue"
+                            as="h3"
+                            icon="address book outline"
+                            textAlign="center"
+                            content="Note List"
+                        />
                     </Grid.Column>
                     <Grid.Column floated="right">
-                        <Button primary inverted color="blue" onClick={() => redirectToAddNotePage()}>
+                        <Button floated="right" primary inverted color="blue" onClick={() => redirectToAddNotePage()}>
                             <Icon name="plus" />
                             Add note
                         </Button>
