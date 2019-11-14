@@ -13,6 +13,11 @@ export const getPersonsRequest = async () => {
     return axios.get(url);
 };
 
+export const getPersonByIdRequest = async id => {
+    const url = `${API}/api/notes/?id=${id}`;
+    return axios.get(url);
+};
+
 export const getRolesRequest = async () => {
     const url = `${API}/api/roles`;
     return axios.get(url);
@@ -33,4 +38,10 @@ export const addNoteRequest = async payload => {
     const url = `${API}/api/notes`;
 
     return axios.post(url, payload);
+};
+
+export const updateNoteRequest = async (id, payload) => {
+    const url = `${API}/api/notes/${id}`;
+
+    return axios.put(url, payload);
 };

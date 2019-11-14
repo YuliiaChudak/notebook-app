@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getPersonsRequest } from '../utils/server';
+import { getPersonByIdRequest, getPersonsRequest } from '../utils/server';
 
 export const usePersonsAPI = () => {
     const [loading, setLoading] = useState(true);
@@ -24,5 +24,32 @@ export const usePersonsAPI = () => {
     return {
         loading,
         persons,
+    };
+};
+
+export const usePersonByIdAPI = id => {
+    const [loading, setLoading] = useState(true);
+    const [person, setPerson] = useState({});
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await getPersonByIdRequest(id);
+                console.log(response.data);
+                setPerson(response.data);
+            } catch (error) {
+                throw new Error();
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [id]);
+
+    console.log('PERSONNN', person);
+    return {
+        loading,
+        person,
     };
 };

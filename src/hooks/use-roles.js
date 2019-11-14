@@ -6,7 +6,6 @@ export const useRoles = () => {
     useEffect(() => {
         const fetchRoles = async () => {
             const response = await getRolesRequest();
-            console.log(response);
             setRoles(response.data);
         };
 

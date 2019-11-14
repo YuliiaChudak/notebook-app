@@ -25,7 +25,7 @@ const NoteList = () => {
                         />
                     </Grid.Column>
                     <Grid.Column floated="right">
-                        <Button floated="right" primary inverted color="blue" onClick={() => redirectToAddNotePage()}>
+                        <Button floated="right" primary inverted color="blue" onClick={redirectToAddNotePage}>
                             <Icon name="plus" />
                             Add note
                         </Button>

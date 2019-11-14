@@ -11,7 +11,7 @@ const Navigation = () => {
                 <Link to="/">Birthday list</Link>
             </Menu.Item>
             <Menu.Item as="span" active={pathname === '/note-list'}>
-                <Link to="note-list">Note list</Link>
+                <Link to="/note-list">Note list</Link>
             </Menu.Item>
         </Menu>
     );

@@ -1,23 +1,15 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext } from 'react';
 import { Button, Form, Header } from 'semantic-ui-react';
 import { today } from '../../utils/consts';
 import { useForm } from '../../hooks/use-form';
 import { DataContext } from '../../context/DataProvider';
 import { addNoteRequest } from '../../utils/server';
+import { useNormalizedRoles } from '../../hooks/use-normalizedRoles';
 
 const AddNote = () => {
     const { values, handleChange, disabled } = useForm();
     const { roles } = useContext(DataContext);
-
-    const normalizeRolesForDropdown = useCallback(
-        roles =>
-            roles.map(role => ({
-                key: role.id,
-                value: role.id,
-                text: role.name,
-            })),
-        [roles],
-    );
+    const { normalizeRolesForDropdown } = useNormalizedRoles(roles);
 
     const handleOnSubmitForm = async e => {
         e.preventDefault();
@@ -26,9 +18,7 @@ const AddNote = () => {
 
     return (
         <>
-            <Header color="blue" as="h3" icon="note" textAlign="center" content="Note List">
-                Add new note
-            </Header>
+            <Header color="blue" textAlign="center" content="Add new note" />
             <Form onSubmit={handleOnSubmitForm}>
                 <Form.Input
                     label="First Name"

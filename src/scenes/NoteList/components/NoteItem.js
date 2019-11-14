@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import Avatar from 'react-avatar';
-import { Button, Grid, Header, List, Segment } from 'semantic-ui-react';
+import { Grid, Header, List, Segment, Button, Icon } from 'semantic-ui-react';
 import DeleteButton from './DeleteButton';
 import { DataContext } from '../../../context/DataProvider';
+import { Link } from 'react-router-dom';
 
 const NoteItem = ({ id, first_name, last_name, patronymic, birthday, occupation, role_id }) => {
     const { getRoleNameById } = useContext(DataContext);
@@ -22,8 +23,11 @@ const NoteItem = ({ id, first_name, last_name, patronymic, birthday, occupation,
                     <List.Item icon="user circle" content={occupation} />
                     <List.Item icon="handshake outline" content={role} />
                 </List>
-                <div>
-                    <Button primary>edit</Button>
+                <div className="ui two buttons responsive">
+                    <Button primary inverted>
+                        <Icon name="edit" />
+                        <Link to={`/edit/${id}`}>edit</Link>
+                    </Button>
                     <DeleteButton personId={id} />
                 </div>
             </Segment>

@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 export const useForm = () => {
     const [values, setValues] = useState({});
-    const [disabled, setDisabled] = useState(true);
 
     const handleChange = (_, data) => {
         console.log(data, 'DATA');
