@@ -1,36 +1,28 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Avatar from 'react-avatar';
-import { Grid, Header, List, Segment, Button, Icon } from 'semantic-ui-react';
+import { Grid, Header, Icon, Segment } from 'semantic-ui-react';
 import DeleteButton from './DeleteButton';
-import { DataContext } from '../../../context/DataProvider';
 import { Link } from 'react-router-dom';
 
-const NoteItem = ({ id, first_name, last_name, patronymic, birthday, occupation, role_id }) => {
-    const { getRoleNameById } = useContext(DataContext);
+const NoteItem = ({ id, first_name, last_name }) => {
     const name = `${first_name} ${last_name}`;
-    const role = getRoleNameById(role_id);
 
     return (
         <Grid.Column textAlign="center">
-            <Avatar round={true} name={name} />
-            <Header color="blue" content={name} />
-            <Segment style={{ margin: '0 auto' }} compact basic textAlign="center">
-                <List>
-                    {patronymic && <List.Item icon="users" content={patronymic} />}
-                    <List.Item icon="birthday cake" content={birthday} />
-                    <List.Item icon="user circle" content={occupation} />
-                    <List.Item icon="handshake outline" content={role} />
-                </List>
-                <div className="ui two buttons responsive">
-                    <Button primary inverted>
-                        <Icon name="edit" />
-                        <Link to={`/edit/${id}`}>edit</Link>
-                    </Button>
-                    <DeleteButton personId={id} />
-                </div>
+            <Segment basic>
+                <Avatar round={true} name={name} />
             </Segment>
+            <Link to={`/note-list/${id}/detailed-note`}>
+                <Header color="grey" content={name} />
+            </Link>
+            <p>
+                <Link to={`/note-list/${id}/edit`}>
+                    <Icon name="edit outline" /> Edit note
+                </Link>
+            </p>
+            <DeleteButton personId={id} />
         </Grid.Column>
     );
 };
@@ -39,10 +31,6 @@ NoteItem.propTypes = {
     id: PropTypes.number.isRequired,
     first_name: PropTypes.string.isRequired,
     last_name: PropTypes.string.isRequired,
-    patronymic: PropTypes.string,
-    birthday: PropTypes.string.isRequired,
-    occupation: PropTypes.string.isRequired,
-    role_id: PropTypes.number.isRequired,
 };
 
 export default NoteItem;
