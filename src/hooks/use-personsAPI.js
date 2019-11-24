@@ -1,44 +1,47 @@
 import { useState, useEffect } from 'react';
-import { getPersonByIdRequest, getPersonsRequest } from '../utils/server';
+import { getNoteByIdRequest, getPersonsRequest } from '../utils/server';
 
 export const usePersonsAPI = () => {
     const [loading, setLoading] = useState(true);
     const [persons, setPersons] = useState([]);
 
+    const fetchPersons = async query => {
+        try {
+            const response = await getPersonsRequest(query);
+
+            setPersons(response.data);
+        } catch (error) {
+            alert('No person in your note');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await getPersonsRequest();
-
-                setPersons(response.data);
-            } catch (error) {
-                throw new Error();
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchData();
+        fetchPersons();
     }, []);
 
     return {
         loading,
         persons,
+        fetchPersons,
     };
 };
 
-export const usePersonByIdAPI = id => {
+export const useNoteByPersonIdAPI = id => {
     const [loading, setLoading] = useState(true);
-    const [person, setPerson] = useState({});
+    const [note, setNote] = useState({});
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await getPersonByIdRequest(id);
-                console.log(response.data);
-                setPerson(response.data);
+                const {
+                    data: [note],
+                } = await getNoteByIdRequest(id);
+
+                setNote(note);
             } catch (error) {
-                throw new Error();
+                alert('Error has occurred while fetching note data.');
             } finally {
                 setLoading(false);
             }
@@ -47,9 +50,8 @@ export const usePersonByIdAPI = id => {
         fetchData();
     }, [id]);
 
-    console.log('PERSONNN', person);
     return {
         loading,
-        person,
+        note,
     };
 };

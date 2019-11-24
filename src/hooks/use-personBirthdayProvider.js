@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { getPersonsByBirthdayRequest } from '../utils/server';
-import { today } from '../utils/consts';
 
 export const usePersonBirthdayProvider = () => {
     const [loading, setLoading] = useState(true);
@@ -9,18 +8,18 @@ export const usePersonBirthdayProvider = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await getPersonsByBirthdayRequest(today);
+                const response = await getPersonsByBirthdayRequest();
 
                 setPersons(response.data);
             } catch (error) {
-                throw new Error();
+                alert('No person in your note');
             } finally {
                 setLoading(false);
             }
         };
 
         fetchData();
-    }, [today]);
+    }, []);
 
     return {
         loading,

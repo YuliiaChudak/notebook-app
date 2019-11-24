@@ -8,13 +8,18 @@ export const deletePerson = id => {
     return axios.delete(url);
 };
 
-export const getPersonsRequest = async () => {
-    const url = `${API}/api/notes`;
+export const getPersonsRequest = async query => {
+    let url = `${API}/api/persons`;
+
+    if (query) {
+        url += `?${query}`;
+    }
+
     return axios.get(url);
 };
 
-export const getPersonByIdRequest = async id => {
-    const url = `${API}/api/notes/?id=${id}`;
+export const getNoteByIdRequest = async id => {
+    const url = `${API}/api/notes/${id}`;
     return axios.get(url);
 };
 
@@ -23,8 +28,8 @@ export const getRolesRequest = async () => {
     return axios.get(url);
 };
 
-export const getPersonsByBirthdayRequest = async date => {
-    const url = `${API}/api/notes?birthday=${date}`;
+export const getPersonsByBirthdayRequest = async () => {
+    const url = `${API}/api/birthday-persons`;
     return axios.get(url);
 };
 
