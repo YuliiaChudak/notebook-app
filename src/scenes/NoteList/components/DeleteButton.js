@@ -15,7 +15,7 @@ const DeleteButton = ({ personId }) => {
 
     return (
         <div>
-            <Button onClick={handleOpen} secondary>
+            <Button fluid primary onClick={handleOpen}>
                 Delete
             </Button>
             <SemanticConfirm
