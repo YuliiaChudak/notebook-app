@@ -3,12 +3,13 @@ import useReactRouter from 'use-react-router';
 import { usePersonsAPI } from '../../hooks/use-personsAPI';
 import { Button, Grid, Header, Icon, Loader } from 'semantic-ui-react';
 import NoteItem from './components/NoteItem';
+import FilterNote from './components/FilterNote';
 
 const NoteList = () => {
-    const { loading, persons } = usePersonsAPI();
+    const { loading, persons, fetchPersons } = usePersonsAPI();
     const { history } = useReactRouter();
     const redirectToAddNotePage = () => {
-        history.push('new');
+        history.push('/note-list/new');
     };
 
     return (
@@ -25,16 +26,17 @@ const NoteList = () => {
                         />
                     </Grid.Column>
                     <Grid.Column floated="right">
-                        <Button floated="right" primary inverted color="blue" onClick={redirectToAddNotePage}>
+                        <Button floated="right" onClick={redirectToAddNotePage}>
                             <Icon name="plus" />
                             Add note
                         </Button>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
+            <FilterNote onApplyFilters={fetchPersons} />
             {loading && <Loader active inline="centered" size="large" />}
             <Grid divided="vertically">
-                <Grid.Row columns={2}>
+                <Grid.Row columns={3}>
                     {persons.map(person => (
                         <NoteItem key={person.id} {...person} />
                     ))}
