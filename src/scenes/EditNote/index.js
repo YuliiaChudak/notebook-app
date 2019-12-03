@@ -1,4 +1,5 @@
 import React from 'react';
+import useReactRouter from 'use-react-router';
 import PropTypes from 'prop-types';
 import { useNoteByPersonIdAPI } from '../../hooks/use-personsAPI';
 import { useForm } from '../../hooks/use-form';
@@ -10,6 +11,10 @@ const EditNote = props => {
     const id = props.match.params.id;
     const { loading, note } = useNoteByPersonIdAPI(id);
     const { values, handleChange, disabled } = useForm(note);
+    const { history } = useReactRouter();
+    const redirectToNoteList = () => {
+        history.push('/note-list');
+    };
 
     const handleOnSubmitForm = async e => {
         e.preventDefault();
@@ -20,6 +25,8 @@ const EditNote = props => {
             phones: [phone],
             addresses: [{ country, city, address }],
         });
+
+        redirectToNoteList();
     };
 
     return (

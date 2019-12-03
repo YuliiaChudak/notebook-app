@@ -3,6 +3,7 @@ import { today } from '../utils/consts';
 
 export const useForm = data => {
     const [values, setValues] = useState({ birthday: today });
+    const [disabled, setDisabled] = useState(true);
 
     useEffect(() => {
         if (data) {
@@ -32,9 +33,12 @@ export const useForm = data => {
                     return values;
             }
         });
+
+        setDisabled(false);
     };
 
     return {
+        disabled,
         handleChange,
         values,
     };
