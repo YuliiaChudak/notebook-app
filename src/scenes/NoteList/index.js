@@ -42,7 +42,9 @@ const NoteList = () => {
                     ))}
                 </Grid.Row>
             </Grid>
-            {!loading && !persons && <Header color="blue" icon="users" content="There is no person in your list" />}
+            {!loading && !persons.length && (
+                <Header color="blue" icon="users" content="There is no person in your list" />
+            )}
         </>
     );
 };
