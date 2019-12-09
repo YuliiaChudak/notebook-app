@@ -1,0 +1,15 @@
+[
+  {
+    "firstName": "Yuliia",
+    "lastName": "Chudak",
+    "patronymic": "Valentinovna",
+    "birthday": "1993-05-13",
+    "occupation": "Software Engineer",
+    "phone": "+380665529190",
+    "location": {
+      "country": "Ukraine",
+      "city": "Kharkiv",
+      "address": "Some st. 9"
+    }
+  }
+]
