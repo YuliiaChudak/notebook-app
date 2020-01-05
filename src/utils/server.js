@@ -29,7 +29,7 @@ export const getRolesRequest = async () => {
 };
 
 export const getPersonsByBirthdayRequest = async () => {
-    const url = `${API}/api/birthday-persons`;
+    const url = `${API}/api/persons/birthday`;
     return axios.get(url);
 };
 

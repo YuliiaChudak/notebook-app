@@ -15,12 +15,17 @@ const AddNote = () => {
     const handleOnSubmitForm = async e => {
         e.preventDefault();
         const { phone, country, city, address, ...data } = values;
+        let payload = data;
 
-        await addNoteRequest({
-            ...data,
-            phones: [phone],
-            addresses: [{ country, city, address }],
-        });
+        if (phone) {
+            payload.phones = [phone];
+        }
+
+        if (country && city && address) {
+            payload.addresses = [{ country, city, address }]
+        }
+
+        await addNoteRequest(payload);
 
         redirectToNoteList();
     };
