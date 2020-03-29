@@ -3,34 +3,36 @@ import { Button, Confirm as SemanticConfirm } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { deletePerson } from '../../../utils/server';
 
-const DeleteButton = ({ personId }) => {
-    const [open, setOpen] = useState(false);
+const DeleteButton = ({ personId, onDelete }) => {
+  const [open, setOpen] = useState(false);
 
-    const handleOpen = () => setOpen(true);
-    const handleConfirm = () => {
-        deletePerson(personId);
-        setOpen(false);
-    };
-    const handleCancel = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
+  const handleConfirm = async () => {
+    await deletePerson(personId);
+    setOpen(false);
+    onDelete(personId);
+  };
+  const handleCancel = () => setOpen(false);
 
-    return (
-        <div>
-            <Button fluid primary onClick={handleOpen}>
-                Delete
-            </Button>
-            <SemanticConfirm
-                open={open}
-                cancelButton="Never mind"
-                confirmButton="Let's do it"
-                onCancel={handleCancel}
-                onConfirm={handleConfirm}
-            />
-        </div>
-    );
+  return (
+    <div>
+      <Button fluid primary onClick={handleOpen}>
+        Delete
+      </Button>
+      <SemanticConfirm
+        open={open}
+        cancelButton="Cancel"
+        confirmButton="Yes"
+        onCancel={handleCancel}
+        onConfirm={handleConfirm}
+      />
+    </div>
+  );
 };
 
 DeleteButton.propTypes = {
-    personId: PropTypes.number.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  personId: PropTypes.number.isRequired,
 };
 
 export default DeleteButton;

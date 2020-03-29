@@ -2,25 +2,25 @@ import { useState } from 'react';
 import { sendCongratulationRequest } from '../utils/server';
 
 export const useCongratulationAPI = () => {
-    const [sending, setSending] = useState(false);
+  const [sending, setSending] = useState(false);
 
-    const sendCongratulation = async (id, name) => {
-        const message = `My congrats ${name}!`;
+  const sendCongratulation = async (id, name) => {
+    const message = `My congrats ${name}!`;
 
-        try {
-            setSending(true);
+    try {
+      setSending(true);
 
-            await sendCongratulationRequest(id, message);
+      await sendCongratulationRequest(id, message);
 
-            setSending(false);
-        } catch (e) {
-            setSending(false);
-            alert('It was not sent (((');
-        }
-    };
+      setSending(false);
+    } catch (e) {
+      setSending(false);
+      alert('It was not sent (((');
+    }
+  };
 
-    return {
-        sending,
-        sendCongratulation,
-    };
+  return {
+    sending,
+    sendCongratulation,
+  };
 };

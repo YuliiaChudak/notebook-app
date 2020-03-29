@@ -3,29 +3,29 @@ import PropTypes from 'prop-types';
 import { useRoles } from '../hooks/use-roles';
 
 const Context = createContext({
-    roles: [],
-    getRoleNameById: () => {},
+  roles: [],
+  getRoleNameById: () => {},
 });
 
 const DataProvider = ({ children }) => {
-    const [roles, setRoles] = useState([]);
-    const { roles: collection } = useRoles();
+  const [roles, setRoles] = useState([]);
+  const { roles: collection } = useRoles();
 
-    useEffect(() => {
-        setRoles(collection);
-    }, [collection]);
+  useEffect(() => {
+    setRoles(collection);
+  }, [collection]);
 
-    const getRoleNameById = id => {
-        const result = collection.find(item => item.id === id);
+  const getRoleNameById = id => {
+    const result = collection.find(item => item.id === id);
 
-        return result ? result.name : 'Unknown';
-    };
+    return result ? result.name : 'Unknown';
+  };
 
-    return <Context.Provider value={{ roles, getRoleNameById }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ roles, getRoleNameById }}>{children}</Context.Provider>;
 };
 
 DataProvider.propTypes = {
-    children: PropTypes.element.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export { Context as DataContext };

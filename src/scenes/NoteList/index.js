@@ -6,47 +6,39 @@ import NoteItem from './components/NoteItem';
 import FilterNote from './components/FilterNote';
 
 const NoteList = () => {
-    const { loading, persons, fetchPersons } = usePersonsAPI();
-    const { history } = useReactRouter();
-    const redirectToAddNotePage = () => {
-        history.push('/note-list/new');
-    };
+  const { loading, persons, fetchPersons, handleDeletePerson } = usePersonsAPI();
+  const { history } = useReactRouter();
+  const redirectToAddNotePage = () => {
+    history.push('/note-list/new');
+  };
 
-    return (
-        <>
-            <Grid divided="vertically">
-                <Grid.Row columns={2}>
-                    <Grid.Column floated="left">
-                        <Header
-                            color="blue"
-                            as="h3"
-                            icon="address book outline"
-                            textAlign="center"
-                            content="Note List"
-                        />
-                    </Grid.Column>
-                    <Grid.Column floated="right">
-                        <Button floated="right" onClick={redirectToAddNotePage}>
-                            <Icon name="plus" />
-                            Add note
-                        </Button>
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
-            <FilterNote onApplyFilters={fetchPersons} />
-            {loading && <Loader active inline="centered" size="large" />}
-            <Grid divided="vertically">
-                <Grid.Row columns={3}>
-                    {persons.map(person => (
-                        <NoteItem key={person.id} {...person} />
-                    ))}
-                </Grid.Row>
-            </Grid>
-            {!loading && !persons.length && (
-                <Header color="blue" icon="users" content="There is no person in your list" />
-            )}
-        </>
-    );
+  return (
+    <>
+      <Grid divided="vertically">
+        <Grid.Row columns={2}>
+          <Grid.Column floated="left">
+            <Header color="blue" as="h3" icon="address book outline" textAlign="center" content="Note List" />
+          </Grid.Column>
+          <Grid.Column floated="right">
+            <Button floated="right" onClick={redirectToAddNotePage}>
+              <Icon name="plus" />
+              Add note
+            </Button>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+      <FilterNote persons={persons} onApplyFilters={fetchPersons} />
+      {loading && <Loader active inline="centered" size="large" />}
+      <Grid divided="vertically">
+        <Grid.Row columns={3} className="note-list">
+          {persons.map(person => (
+            <NoteItem key={person.id} {...person} onDelete={handleDeletePerson} />
+          ))}
+        </Grid.Row>
+      </Grid>
+      {!loading && !persons.length && <Header color="blue" icon="users" content="There is no person in your list" />}
+    </>
+  );
 };
 
 export default NoteList;
