@@ -18,7 +18,6 @@ describe('Note creation:', () => {
         cy.get('input[name="country"]').type(person.location.country);
         cy.get('input[name="city"]').type(person.location.city);
         cy.get('input[name="address"]').type(person.location.address);
-        cy.get('input[name="is_studying"]').click({ force: true });
         cy.get('.button').contains('Save').click();
         cy.get('div').contains(`${person.firstName} ${person.lastName}`);
     });
